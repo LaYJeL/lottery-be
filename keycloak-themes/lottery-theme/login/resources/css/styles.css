@@ -1,0 +1,279 @@
+:root {
+    --primary: #646cff;
+    --primary-hover: #535bf2;
+    --bg: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --text: #f8fafc;
+    --input-bg: rgba(15, 23, 42, 0.6);
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top right, #1e293b, #0f172a);
+    color: var(--text);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.login-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 40px;
+    border-radius: 24px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.logo {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #94a3b8;
+}
+
+input {
+    width: 100%;
+    padding: 12px 16px;
+    background: var(--input-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    box-sizing: border-box;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(100, 108, 255, 0.2);
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.2s;
+    margin-top: 24px;
+}
+
+.btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+}
+
+.language-picker {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 1000;
+}
+
+.dropbtn {
+    background: rgba(255, 255, 255, 0.05);
+    color: #94a3b8;
+    padding: 8px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block !important;
+}
+
+.lang-item {
+    color: #94a3b8 !important;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+    font-size: 13px;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.dropdown::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 10px;
+}
+
+.kc-feedback-text,
+.pf-c-form__group-label-help,
+.instruction {
+    display: none !important;
+}
+
+#kc-register-form {
+    margin-top: 20px;
+}
+
+.registration-container {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.pf-c-button {
+    display: none !important; /* Ховаємо стандартні кнопки PatternFly */
+}
+
+.required {
+    color: #ef4444;
+    margin-left: 4px;
+    font-weight: bold;
+}
+
+.lang-item:hover {
+    background: rgba(100, 108, 255, 0.1) !important;
+    color: #646cff !important;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none; /* Сховано за замовчуванням */
+    position: absolute;
+    right: 0;
+    top: 100%;
+    margin-top: 8px;
+    background: #1e293b;
+    min-width: 120px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+    overflow: hidden;
+    padding: 4px;
+}
+
+.dropdown-content a {
+    color: #94a3b8;
+    padding: 10px 14px;
+    text-decoration: none;
+    display: block;
+    font-size: 13px;
+    transition: 0.2s;
+}
+
+.dropdown-content a:hover {
+    background: rgba(100, 108, 255, 0.1);
+    color: var(--primary);
+}
+
+/* Помилки */
+.alert {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    text-align: center;
+}
+.alert-error { background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #fca5a5; }
+
+/* Відступ для посилання "Забули пароль" */
+.form-actions {
+    text-align: right;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+.forgot-link {
+    font-size: 13px;
+    color: #94a3b8 !important;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.forgot-link:hover {
+    color: var(--primary) !important;
+}
+
+/* Контейнер для кнопки реєстрації */
+.registration-container {
+    margin-top: 32px; /* Посунули нижче, як ти просив */
+    padding-top: 24px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05); /* Ледь помітна лінія-розділювач */
+    text-align: center;
+}
+
+/* Стиль другорядної кнопки (Реєстрація) */
+.btn-secondary {
+    display: inline-block;
+    width: 100%;
+    padding: 12px;
+    background: transparent;
+    color: var(--text) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    font-weight: 500;
+    font-size: 15px;
+    text-decoration: none;
+    box-sizing: border-box;
+    transition: 0.3s all ease;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--primary);
+    color: var(--primary) !important;
+}
+
+.btn-primary {
+    box-shadow: 0 4px 14px 0 rgba(100, 108, 255, 0.39);
+}
+
+
+.input-group label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 8px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.required {
+    color: #ef4444;
+    white-space: nowrap;
+}

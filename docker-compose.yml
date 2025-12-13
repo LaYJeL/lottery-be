@@ -1,0 +1,76 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: lottery-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: lottery_user
+      POSTGRES_PASSWORD: lottery_password
+      POSTGRES_DB: lottery_db
+    ports:
+      - "5434:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U lottery_user -d lottery_db" ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  keycloak-db:
+    image: postgres:16-alpine
+    container_name: lottery-keycloak-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak_password
+      POSTGRES_DB: keycloak
+    volumes:
+      - keycloak_db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U keycloak -d keycloak" ]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.4.7
+    container_name: lottery-keycloak
+    restart: unless-stopped
+    depends_on:
+      keycloak-db:
+        condition: service_healthy
+    command: [ "start-dev", "--import-realm", "--spi-theme-static-max-age=-1", "--spi-theme-cache-themes=false", "--spi-theme-cache-templates=false" ]
+    environment:
+      # bootstrap admin (актуальні змінні для контейнерів)
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+
+      # postgres
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://keycloak-db:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak_password
+
+      # опційно (зручно для readiness/health у dev)
+      KC_HEALTH_ENABLED: "true"
+      KC_METRICS_ENABLED: "true"
+    ports:
+      - "8080:8080"
+    volumes:
+      # сюди потім покладемо realm-export.json
+      - ./keycloak/import:/opt/keycloak/data/import
+      - ./keycloak-themes/lottery-theme:/opt/keycloak/themes/lottery-theme
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: lottery-mailhog
+    restart: unless-stopped
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
+volumes:
+  db_data:
+  keycloak_db_data:
+  pgadmin_data:
