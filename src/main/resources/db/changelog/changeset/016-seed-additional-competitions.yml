@@ -1,0 +1,409 @@
+databaseChangeLog:
+  - changeSet:
+      id: 016-seed-additional-competitions
+      author: antigravity
+      changes:
+        # COMPLETED Competitions (past)
+        - insert:
+            tableName: competitions
+            columns:
+              - column:
+                  name: title
+                  value: "New Year Coding Sprint 2025"
+              - column:
+                  name: type
+                  value: "GAMING"
+              - column:
+                  name: description
+                  value: "48-hour hackathon to build innovative solutions for the new year."
+              - column:
+                  name: prize
+                  value: "$3,000 + Job Offers"
+              - column:
+                  name: entry_fee
+                  valueNumeric: 0.00
+              - column:
+                  name: start_time
+                  valueDate: "2025-01-01T00:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-01-03T23:59:59"
+              - column:
+                  name: status
+                  value: "COMPLETED"
+              - column:
+                  name: participants_count
+                  valueNumeric: 156
+
+        - insert:
+            tableName: competitions
+            columns:
+              - column:
+                  name: title
+                  value: "Valentine's Day Art Contest"
+              - column:
+                  name: type
+                  value: "DESIGN"
+              - column:
+                  name: description
+                  value: "Create romantic artwork celebrating love. Digital or traditional art accepted."
+              - column:
+                  name: prize
+                  value: "$500 + Art Supplies Kit"
+              - column:
+                  name: entry_fee
+                  valueNumeric: 2.00
+              - column:
+                  name: start_time
+                  valueDate: "2025-02-01T00:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2025-02-14T23:59:59"
+              - column:
+                  name: status
+                  value: "COMPLETED"
+              - column:
+                  name: participants_count
+                  valueNumeric: 234
+
+        # ACTIVE Competitions (future end dates)
+        - insert:
+            tableName: competitions
+            columns:
+              - column:
+                  name: title
+                  value: "Music Video Producer Challenge"
+              - column:
+                  name: type
+                  value: "DESIGN"
+              - column:
+                  name: description
+                  value: "Produce a music video for an indie artist. Show your creative vision!"
+              - column:
+                  name: prize
+                  value: "$8,000 + Music Industry Contacts"
+              - column:
+                  name: entry_fee
+                  valueNumeric: 25.00
+              - column:
+                  name: start_time
+                  valueDate: "2026-01-15T00:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2026-04-15T23:59:59"
+              - column:
+                  name: status
+                  value: "ACTIVE"
+              - column:
+                  name: image_url
+                  value: "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&auto=format&fit=crop&q=60"
+              - column:
+                  name: participants_count
+                  valueNumeric: 0
+
+        - insert:
+            tableName: competitions
+            columns:
+              - column:
+                  name: title
+                  value: "Street Photography Week"
+              - column:
+                  name: type
+                  value: "PHOTOGRAPHY"
+              - column:
+                  name: description
+                  value: "Capture the essence of urban life. Documentary style street photography contest."
+              - column:
+                  name: prize
+                  value: "$2,500 + Gallery Exhibition"
+              - column:
+                  name: entry_fee
+                  valueNumeric: 8.00
+              - column:
+                  name: start_time
+                  valueDate: "2026-02-01T00:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2026-03-31T23:59:59"
+              - column:
+                  name: status
+                  value: "ACTIVE"
+              - column:
+                  name: image_url
+                  value: "https://images.unsplash.com/photo-1476973422084-e0fa66ff9456?w=800&auto=format&fit=crop&q=60"
+              - column:
+                  name: participants_count
+                  valueNumeric: 0
+
+        - insert:
+            tableName: competitions
+            columns:
+              - column:
+                  name: title
+                  value: "AI Art Generator Contest"
+              - column:
+                  name: type
+                  value: "DESIGN"
+              - column:
+                  name: description
+                  value: "Use AI tools to create stunning artwork. Prompting skills matter!"
+              - column:
+                  name: prize
+                  value: "$4,000 + AI Tools Subscription"
+              - column:
+                  name: entry_fee
+                  valueNumeric: 15.00
+              - column:
+                  name: start_time
+                  valueDate: "2026-01-20T00:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2026-05-20T23:59:59"
+              - column:
+                  name: status
+                  value: "ACTIVE"
+              - column:
+                  name: image_url
+                  value: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop&q=60"
+              - column:
+                  name: participants_count
+                  valueNumeric: 0
+
+        - insert:
+            tableName: competitions
+            columns:
+              - column:
+                  name: title
+                  value: "Retro Gaming Tournament"
+              - column:
+                  name: type
+                  value: "GAMING"
+              - column:
+                  name: description
+                  value: "Classic games competition - Tetris, Pac-Man, and more! Prove your old-school skills."
+              - column:
+                  name: prize
+                  value: "$1,500 + Retro Console Collection"
+              - column:
+                  name: entry_fee
+                  valueNumeric: 10.00
+              - column:
+                  name: start_time
+                  valueDate: "2026-02-05T00:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2026-03-05T23:59:59"
+              - column:
+                  name: status
+                  value: "ACTIVE"
+              - column:
+                  name: image_url
+                  value: "https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=800&auto=format&fit=crop&q=60"
+              - column:
+                  name: participants_count
+                  valueNumeric: 0
+
+        - insert:
+            tableName: competitions
+            columns:
+              - column:
+                  name: title
+                  value: "Sci-Fi Short Story Contest"
+              - column:
+                  name: type
+                  value: "WRITING"
+              - column:
+                  name: description
+                  value: "Write a sci-fi short story about humanity's first contact with aliens. 3000 words max."
+              - column:
+                  name: prize
+                  value: "$2,000 + Publishing Deal"
+              - column:
+                  name: entry_fee
+                  valueNumeric: 3.00
+              - column:
+                  name: start_time
+                  valueDate: "2026-01-25T00:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2026-04-25T23:59:59"
+              - column:
+                  name: status
+                  value: "ACTIVE"
+              - column:
+                  name: image_url
+                  value: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&auto=format&fit=crop&q=60"
+              - column:
+                  name: participants_count
+                  valueNumeric: 0
+
+        - insert:
+            tableName: competitions
+            columns:
+              - column:
+                  name: title
+                  value: "Mobile App UI Challenge"
+              - column:
+                  name: type
+                  value: "DESIGN"
+              - column:
+                  name: description
+                  value: "Design a beautiful mobile app interface for a fitness tracking app."
+              - column:
+                  name: prize
+                  value: "iPad Pro + $1,500"
+              - column:
+                  name: entry_fee
+                  valueNumeric: 0.00
+              - column:
+                  name: start_time
+                  valueDate: "2026-02-10T00:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2026-06-10T23:59:59"
+              - column:
+                  name: status
+                  value: "ACTIVE"
+              - column:
+                  name: image_url
+                  value: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&auto=format&fit=crop&q=60"
+              - column:
+                  name: participants_count
+                  valueNumeric: 0
+
+        # DRAFT Competitions (future end dates)
+        - insert:
+            tableName: competitions
+            columns:
+              - column:
+                  name: title
+                  value: "Spring Poetry Festival"
+              - column:
+                  name: type
+                  value: "WRITING"
+              - column:
+                  name: description
+                  value: "Submit your original poems celebrating spring, renewal, and nature."
+              - column:
+                  name: prize
+                  value: "$1,000 + Poetry Book Publication"
+              - column:
+                  name: entry_fee
+                  valueNumeric: 0.00
+              - column:
+                  name: start_time
+                  valueDate: "2026-03-20T00:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2026-05-20T23:59:59"
+              - column:
+                  name: status
+                  value: "DRAFT"
+              - column:
+                  name: image_url
+                  value: "https://images.unsplash.com/photo-1462275646964-a0e3386b89fa?w=800&auto=format&fit=crop&q=60"
+              - column:
+                  name: participants_count
+                  valueNumeric: 0
+
+        - insert:
+            tableName: competitions
+            columns:
+              - column:
+                  name: title
+                  value: "VR Experience Design"
+              - column:
+                  name: type
+                  value: "GAMING"
+              - column:
+                  name: description
+                  value: "Create an immersive VR experience. Theme: Underwater exploration."
+              - column:
+                  name: prize
+                  value: "VR Headset + $5,000"
+              - column:
+                  name: entry_fee
+                  valueNumeric: 30.00
+              - column:
+                  name: start_time
+                  valueDate: "2026-04-01T00:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2026-07-01T23:59:59"
+              - column:
+                  name: status
+                  value: "DRAFT"
+              - column:
+                  name: image_url
+                  value: "https://images.unsplash.com/photo-1617802690992-15d93263d3a9?w=800&auto=format&fit=crop&q=60"
+              - column:
+                  name: participants_count
+                  valueNumeric: 0
+
+        - insert:
+            tableName: competitions
+            columns:
+              - column:
+                  name: title
+                  value: "Wildlife Photography Expedition"
+              - column:
+                  name: type
+                  value: "PHOTOGRAPHY"
+              - column:
+                  name: description
+                  value: "Capture stunning wildlife moments. National Geographic style submissions welcome."
+              - column:
+                  name: prize
+                  value: "$10,000 + Safari Trip"
+              - column:
+                  name: entry_fee
+                  valueNumeric: 20.00
+              - column:
+                  name: start_time
+                  valueDate: "2026-05-01T00:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2026-09-30T23:59:59"
+              - column:
+                  name: status
+                  value: "DRAFT"
+              - column:
+                  name: image_url
+                  value: "https://images.unsplash.com/photo-1474511320723-9a56873571b7?w=800&auto=format&fit=crop&q=60"
+              - column:
+                  name: participants_count
+                  valueNumeric: 0
+
+        - insert:
+            tableName: competitions
+            columns:
+              - column:
+                  name: title
+                  value: "Horror Story Writing Contest"
+              - column:
+                  name: type
+                  value: "WRITING"
+              - column:
+                  name: description
+                  value: "Write a terrifying horror story. Make us lose sleep! 5000 words max."
+              - column:
+                  name: prize
+                  value: "$3,500 + Horror Anthology Inclusion"
+              - column:
+                  name: entry_fee
+                  valueNumeric: 5.00
+              - column:
+                  name: start_time
+                  valueDate: "2026-06-01T00:00:00"
+              - column:
+                  name: end_time
+                  valueDate: "2026-10-31T23:59:59"
+              - column:
+                  name: status
+                  value: "DRAFT"
+              - column:
+                  name: image_url
+                  value: "https://images.unsplash.com/photo-1509248961725-aec71c15da5f?w=800&auto=format&fit=crop&q=60"
+              - column:
+                  name: participants_count
+                  valueNumeric: 0

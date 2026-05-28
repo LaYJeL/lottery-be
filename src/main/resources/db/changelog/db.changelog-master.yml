@@ -3,3 +3,33 @@ databaseChangeLog:
       file: db/changelog/changeset/000-create-schema.sql
   - include:
       file: db/changelog/changeset/001-init-user-module.sql
+  - include:
+      file: db/changelog/changeset/002-verification-codes.sql
+  - include:
+      file: db/changelog/changeset/003-add-wallet-module.sql
+  - include:
+      file: db/changelog/changeset/004-backfill-wallets.sql
+  - include:
+      file: db/changelog/changeset/005-add-gamification-module.sql
+  - include:
+      file: db/changelog/changeset/006-insert-default-tasks.yml
+  - include:
+      file: db/changelog/changeset/007-add-user-level-column.sql
+  - include:
+      file: db/changelog/changeset/008-add-task-icon.sql
+  - include:
+      file: db/changelog/changeset/009-seed-more-achievements.yml
+  - include:
+      file: db/changelog/changeset/010-update-special-conditions.sql
+  - include:
+      file: db/changelog/changeset/011-add-birthday-condition.sql
+  - include:
+      file: db/changelog/changeset/012-create-competitions-schema.sql
+  - include:
+      file: db/changelog/changeset/013-seed-competitions.yml
+  - include:
+      file: db/changelog/changeset/014-add-approval-flag.sql
+  - include:
+      file: db/changelog/changeset/016-seed-additional-competitions.yml
+  - include:
+      file: db/changelog/changeset/017-fix-account-level-tiers.sql

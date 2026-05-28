@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS lottery.users (
                                              modified_by UUID,
                                              CONSTRAINT uk_users_keycloak_sub UNIQUE (keycloak_sub),
                                              CONSTRAINT ck_users_auth_provider CHECK (auth_provider IN ('GOOGLE','LOCAL')),
-                                             CONSTRAINT ck_users_account_status CHECK (account_status IN ('ACTIVE','BLOCKED'))
+                                             CONSTRAINT ck_users_account_status CHECK (account_status IN ('ACTIVE','BLOCKED','DELETED'))
 );
 
 CREATE TABLE IF NOT EXISTS lottery.user_profiles (
@@ -29,6 +29,17 @@ CREATE TABLE IF NOT EXISTS lottery.user_profiles (
                                                      birth_date DATE,
                                                      display_name VARCHAR(120),
                                                      verification_level VARCHAR(16) NOT NULL DEFAULT 'NEW',
+                                                     -- Added from 003
+                                                     reputation INT NOT NULL DEFAULT 0,
+                                                     balance DECIMAL(19, 4) NOT NULL DEFAULT 0,
+                                                     tickets_purchased INT NOT NULL DEFAULT 0,
+                                                     competition_entries INT NOT NULL DEFAULT 0,
+                                                     tasks_completed INT NOT NULL DEFAULT 0,
+                                                     total_winnings DECIMAL(19, 4) NOT NULL DEFAULT 0,
+                                                     account_level VARCHAR(32) NOT NULL DEFAULT 'BRONZE',
+                                                     level_progress INT NOT NULL DEFAULT 0,
+                                                     email_notifications BOOLEAN NOT NULL DEFAULT TRUE,
+                                                     -- End Added from 003
                                                      created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
                                                      modified_at TIMESTAMPTZ NOT NULL DEFAULT now(),
                                                      created_by UUID,

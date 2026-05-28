@@ -4,6 +4,7 @@ import com.game.lottery.enums.VerificationLevel;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -54,6 +55,46 @@ public class UserProfile extends Auditable {
     @Enumerated(EnumType.STRING)
     @Column(name = "verification_level", nullable = false, length = 16)
     private VerificationLevel verificationLevel;
+
+    @Column(name = "reputation", nullable = false)
+    @Builder.Default
+    private Integer reputation = 0;
+
+    @Column(name = "balance", nullable = false)
+    @Builder.Default
+    private BigDecimal balance = BigDecimal.ZERO;
+
+    @Column(name = "tickets_purchased", nullable = false)
+    @Builder.Default
+    private Integer ticketsPurchased = 0;
+
+    @Column(name = "competition_entries", nullable = false)
+    @Builder.Default
+    private Integer competitionEntries = 0;
+
+    @Column(name = "tasks_completed", nullable = false)
+    @Builder.Default
+    private Integer tasksCompleted = 0;
+
+    @Column(name = "total_winnings", nullable = false)
+    @Builder.Default
+    private BigDecimal totalWinnings = BigDecimal.ZERO;
+
+    @Column(name = "account_level", nullable = false, length = 32)
+    @Builder.Default
+    private String accountLevel = "NOVICE";
+
+    @Column(name = "level_progress", nullable = false)
+    @Builder.Default
+    private Integer levelProgress = 0;
+
+    @Column(name = "current_level", nullable = false)
+    @Builder.Default
+    private Integer currentLevel = 1;
+
+    @Column(name = "email_notifications", nullable = false)
+    @Builder.Default
+    private Boolean emailNotifications = true;
 
     public static UserProfile empty(User user) {
         return UserProfile.builder()

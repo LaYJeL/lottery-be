@@ -15,13 +15,9 @@ import java.util.UUID;
 @AllArgsConstructor
 @Builder
 @Entity
-@Table(
-        name = "users",
-        schema = "lottery",
-        uniqueConstraints = {
-                @UniqueConstraint(name = "uk_users_keycloak_sub", columnNames = "keycloak_sub")
-        }
-)
+@Table(name = "users", schema = "lottery", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_users_keycloak_sub", columnNames = "keycloak_sub")
+})
 public class User extends Auditable {
 
     @Id
@@ -48,8 +44,14 @@ public class User extends Auditable {
     @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
     private UserOnboarding checklist;
 
+    @Builder.Default
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<PaymentMethod> paymentMethods = new ArrayList<>();
+
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @OneToOne(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false, orphanRemoval = true)
+    private Wallet wallet;
 
     @PrePersist
     void prePersist() {
@@ -71,6 +73,12 @@ public class User extends Auditable {
             checklist = UserOnboarding.empty(this);
         } else {
             checklist.setUser(this);
+        }
+
+        if (wallet == null) {
+            wallet = Wallet.builder().user(this).build();
+        } else {
+            wallet.setUser(this);
         }
 
         checklist.syncFromProfile(profile);

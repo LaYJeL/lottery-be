@@ -1,0 +1,234 @@
+databaseChangeLog:
+  - changeSet:
+      id: 006-insert-default-tasks
+      author: antigravity
+      changes:
+        # DAILY TASKS
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Early Riser" }
+              - column: { name: description, value: "Log in to your account once today." }
+              - column: { name: category, value: "DAILY" }
+              - column: { name: action_type, value: "LOGIN" }
+              - column: { name: target_count, valueNumeric: 1 }
+              - column: { name: reward_points, valueNumeric: 10 }
+              - column: { name: is_active, valueBoolean: false }
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Daily Player" }
+              - column: { name: description, value: "Play at least 1 lottery game today." }
+              - column: { name: category, value: "DAILY" }
+              - column: { name: action_type, value: "PURCHASE_TICKET" }
+              - column: { name: target_count, valueNumeric: 1 }
+              - column: { name: reward_points, valueNumeric: 20 }
+              - column: { name: is_active, valueBoolean: false }
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Results Watcher" }
+              - column: { name: description, value: "Check the lottery results page." }
+              - column: { name: category, value: "DAILY" }
+              - column: { name: action_type, value: "CHECK_RESULTS" }
+              - column: { name: target_count, valueNumeric: 1 }
+              - column: { name: reward_points, valueNumeric: 5 }
+              - column: { name: is_active, valueBoolean: false }
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Ticket Master" }
+              - column: { name: description, value: "Purchase 3 tickets in a single day." }
+              - column: { name: category, value: "DAILY" }
+              - column: { name: action_type, value: "PURCHASE_TICKET" }
+              - column: { name: target_count, valueNumeric: 3 }
+              - column: { name: reward_points, valueNumeric: 30 }
+              - column: { name: is_active, valueBoolean: false }
+        
+        # WEEKLY TASKS
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Weekly Login Streak" }
+              - column: { name: description, value: "Log in 5 times this week." }
+              - column: { name: category, value: "WEEKLY" }
+              - column: { name: action_type, value: "LOGIN" }
+              - column: { name: target_count, valueNumeric: 5 }
+              - column: { name: reward_points, valueNumeric: 50 }
+              - column: { name: is_active, valueBoolean: false }
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "High Roller" }
+              - column: { name: description, value: "Purchase 10 tickets this week." }
+              - column: { name: category, value: "WEEKLY" }
+              - column: { name: action_type, value: "PURCHASE_TICKET" }
+              - column: { name: target_count, valueNumeric: 10 }
+              - column: { name: reward_points, valueNumeric: 100 }
+              - column: { name: is_active, valueBoolean: false }
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Competition Spirit" }
+              - column: { name: description, value: "Enter 3 competitions this week." }
+              - column: { name: category, value: "WEEKLY" }
+              - column: { name: action_type, value: "ENTER_COMPETITION" }
+              - column: { name: target_count, valueNumeric: 3 }
+              - column: { name: reward_points, valueNumeric: 75 }
+              - column: { name: is_active, valueBoolean: false }
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Weekend Deposit" }
+              - column: { name: description, value: "Make 2 deposits this week." }
+              - column: { name: category, value: "WEEKLY" }
+              - column: { name: action_type, value: "DEPOSIT" }
+              - column: { name: target_count, valueNumeric: 2 }
+              - column: { name: reward_points, valueNumeric: 80 }
+              - column: { name: is_active, valueBoolean: false }
+
+        # ONE-TIME / BASICS
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Verified Identity" }
+              - column: { name: description, value: "Complete identity verification." }
+              - column: { name: category, value: "ONETIME" }
+              - column: { name: action_type, value: "VERIFY_ID" }
+              - column: { name: target_count, valueNumeric: 1 }
+              - column: { name: reward_points, valueNumeric: 500 }
+              - column: { name: is_active, valueBoolean: false }
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "First Deposit" }
+              - column: { name: description, value: "Make your first deposit." }
+              - column: { name: category, value: "ONETIME" }
+              - column: { name: action_type, value: "DEPOSIT" }
+              - column: { name: target_count, valueNumeric: 1 }
+              - column: { name: reward_points, valueNumeric: 200 }
+              - column: { name: is_active, valueBoolean: false }
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "First Ticket" }
+              - column: { name: description, value: "Purchase your first lottery ticket." }
+              - column: { name: category, value: "ONETIME" }
+              - column: { name: action_type, value: "PURCHASE_TICKET" }
+              - column: { name: target_count, valueNumeric: 1 }
+              - column: { name: reward_points, valueNumeric: 100 }
+              - column: { name: is_active, valueBoolean: false }
+        
+        # ACHIEVEMENTS
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Socialite" }
+              - column: { name: description, value: "Refer 5 friends to the platform." }
+              - column: { name: category, value: "ACHIEVEMENT" }
+              - column: { name: action_type, value: "REFERRAL" }
+              - column: { name: target_count, valueNumeric: 5 }
+              - column: { name: reward_points, valueNumeric: 1000 }
+              - column: { name: is_active, valueBoolean: false }
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Loyal Member" }
+              - column: { name: description, value: "Log in 100 times total." }
+              - column: { name: category, value: "ACHIEVEMENT" }
+              - column: { name: action_type, value: "LOGIN" }
+              - column: { name: target_count, valueNumeric: 100 }
+              - column: { name: reward_points, valueNumeric: 500 }
+              - column: { name: is_active, valueBoolean: false }
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Big Spender" }
+              - column: { name: description, value: "Purchase 100 tickets total." }
+              - column: { name: category, value: "ACHIEVEMENT" }
+              - column: { name: action_type, value: "PURCHASE_TICKET" }
+              - column: { name: target_count, valueNumeric: 100 }
+              - column: { name: reward_points, valueNumeric: 2000 }
+              - column: { name: is_active, valueBoolean: false }
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Opinion Leader" }
+              - column: { name: description, value: "Vote in 10 community polls." }
+              - column: { name: category, value: "ACHIEVEMENT" }
+              - column: { name: action_type, value: "VOTE" }
+              - column: { name: target_count, valueNumeric: 10 }
+              - column: { name: reward_points, valueNumeric: 300 }
+              - column: { name: is_active, valueBoolean: false }
+
+        # SPECIAL / EXTRAS
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Birthday Bonus" }
+              - column: { name: description, value: "Log in on your birthday (requires manual claim)." }
+              - column: { name: category, value: "SPECIAL" }
+              - column: { name: action_type, value: "LOGIN" }
+              - column: { name: target_count, valueNumeric: 1 }
+              - column: { name: reward_points, valueNumeric: 100 }
+              - column: { name: is_active, valueBoolean: false }
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Promo Hunter" }
+              - column: { name: description, value: "Enter 1 special promo competition." }
+              - column: { name: category, value: "SPECIAL" }
+              - column: { name: action_type, value: "ENTER_COMPETITION" }
+              - column: { name: target_count, valueNumeric: 1 }
+              - column: { name: reward_points, valueNumeric: 150 }
+              - column: { name: is_active, valueBoolean: false }
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Civic Duty" }
+              - column: { name: description, value: "Vote in 1 poll this week." }
+              - column: { name: category, value: "WEEKLY" }
+              - column: { name: action_type, value: "VOTE" }
+              - column: { name: target_count, valueNumeric: 1 }
+              - column: { name: reward_points, valueNumeric: 25 }
+              - column: { name: is_active, valueBoolean: false }
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Referral Starter" }
+              - column: { name: description, value: "Refer your first friend." }
+              - column: { name: category, value: "ONETIME" }
+              - column: { name: action_type, value: "REFERRAL" }
+              - column: { name: target_count, valueNumeric: 1 }
+              - column: { name: reward_points, valueNumeric: 200 }
+              - column: { name: is_active, valueBoolean: false }
+        - insert:
+            tableName: gamification_tasks
+            columns:
+              - column: { name: id, valueComputed: "gen_random_uuid()" }
+              - column: { name: title, value: "Deposit Hero" }
+              - column: { name: description, value: "Make 5 deposits total." }
+              - column: { name: category, value: "ACHIEVEMENT" }
+              - column: { name: action_type, value: "DEPOSIT" }
+              - column: { name: target_count, valueNumeric: 5 }
+              - column: { name: reward_points, valueNumeric: 1000 }
+              - column: { name: is_active, valueBoolean: false }

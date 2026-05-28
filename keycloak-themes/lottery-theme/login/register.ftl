@@ -1,11 +1,22 @@
 <#import "template.ftl" as layout>
-<@layout.registrationLayout displayMessage=!messagesPerField.existsError('email','username','password','password-confirm'); section>
-    <#if section = "form">
+<@layout.registrationLayout displayMessage=!messagesPerField.existsError('email','password','password-confirm'); section>
+    <#if section = "header">
+        <div class="auth-header">
+            <div class="logo-container">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h1 class="auth-title">${msg("registerTitle")}</h1>
+            <p class="auth-subtitle">${msg("registerSubtitle")}</p>
+        </div>
+    <#elseif section = "form">
         <form id="kc-register-form" action="${url.registrationAction}" method="post">
 
             <div class="input-group">
-                <label for="email">${msg("email")} <span class="required">*</span></label>
-                <input type="text" id="email" name="email" value="${(register.formData.email!'')}" autocomplete="email" />
+                <label for="email">${msg("emailLabel")} <span class="required">*</span></label>
+                <div class="input-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    <input type="email" id="email" name="email" value="${(register.formData.email!'')}" autocomplete="email" placeholder="${msg("placeholderEmail")}" />
+                </div>
                 <span id="client-email-error" class="error-message" style="display:none;"></span>
                 <#if messagesPerField.existsError('email')>
                     <span id="input-error-email" class="error-message" aria-live="polite">
@@ -14,21 +25,14 @@
                 </#if>
             </div>
 
-            <div class="input-group">
-                <label for="username">${msg("username")} <span class="required">*</span></label>
-                <input type="text" id="username" name="username" value="${(register.formData.username!'')}" autocomplete="username" />
-                <span id="client-username-error" class="error-message" style="display:none;"></span>
-                <#if messagesPerField.existsError('username')>
-                    <span id="input-error-username" class="error-message" aria-live="polite">
-                        ${kcSanitize(messagesPerField.get('username'))?no_esc}
-                    </span>
-                </#if>
-            </div>
+            <!-- Username field removed (Email as Username) -->
 
             <div class="input-group">
-                <label for="password">${msg("password")} <span class="required">*</span></label>
+                <label for="password">${msg("passwordLabel")} <span class="required">*</span></label>
                 <div class="password-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                     <input type="password" id="password" name="password" autocomplete="new-password"
+                           placeholder="${msg("placeholderPassword")}"
                            aria-invalid="${messagesPerField.existsError('password','password-confirm')?c}"
                            class="${messagesPerField.existsError('password','password-confirm')?then('error', '')}"
                     />
@@ -44,22 +48,46 @@
                     </span>
                 </#if>
                 
-                <!-- Password Requirements Checklist (Moved here) -->
-                <div class="password-rules-container">
+                
+                <!-- Password Requirements Checklist -->
+                <div class="password-rules-container" id="password-rules">
+                     <div class="rules-header">${msg("passwordRule.header")}</div>
                      <ul class="password-rules-list">
-                         <li id="rule-length" class="rule-item invalid"><span class="icon">✗</span> ${msg("passwordRule.length")}</li>
-                         <li id="rule-upper" class="rule-item invalid"><span class="icon">✗</span> ${msg("passwordRule.upper")}</li>
-                         <li id="rule-lower" class="rule-item invalid"><span class="icon">✗</span> ${msg("passwordRule.lower")}</li>
-                         <li id="rule-digit" class="rule-item invalid"><span class="icon">✗</span> ${msg("passwordRule.digit")}</li>
-                         <li id="rule-special" class="rule-item invalid"><span class="icon">✗</span> ${msg("passwordRule.special")}</li>
+                         <li id="rule-length" class="rule-item invalid">
+                             <span class="icon-circle"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg></span>
+                             <span class="icon-check" style="display:none;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></span>
+                             ${msg("passwordRule.length")}
+                         </li>
+                         <li id="rule-upper" class="rule-item invalid">
+                             <span class="icon-circle"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg></span>
+                             <span class="icon-check" style="display:none;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></span>
+                             ${msg("passwordRule.upper")}
+                         </li>
+                         <li id="rule-lower" class="rule-item invalid">
+                             <span class="icon-circle"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg></span>
+                             <span class="icon-check" style="display:none;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></span>
+                             ${msg("passwordRule.lower")}
+                         </li>
+                         <li id="rule-digit" class="rule-item invalid">
+                             <span class="icon-circle"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg></span>
+                             <span class="icon-check" style="display:none;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></span>
+                             ${msg("passwordRule.digit")}
+                         </li>
+                         <li id="rule-special" class="rule-item invalid">
+                             <span class="icon-circle"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle></svg></span>
+                             <span class="icon-check" style="display:none;"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></span>
+                             ${msg("passwordRule.special")}
+                         </li>
                      </ul>
                 </div>
             </div>
 
             <div class="input-group">
-                <label for="password-confirm">${msg("passwordConfirm")} <span class="required">*</span></label>
+                <label for="password-confirm">${msg("passwordConfirmLabel")} <span class="required">*</span></label>
                 <div class="password-wrapper">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
                     <input type="password" id="password-confirm" name="password-confirm"
+                           placeholder="${msg("placeholderConfirmPassword")}"
                            class="${messagesPerField.existsError('password-confirm')?then('error', '')}"
                            aria-invalid="${messagesPerField.existsError('password-confirm')?c}"
                     />
@@ -81,9 +109,20 @@
 
                 <style>
                     .password-rules-container {
-                        margin-top: 8px;
+                        margin-top: 5px;
                         font-size: 0.85rem;
-                        color: #6c757d;
+                        background: rgba(15, 23, 42, 0.6);
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        border-radius: 8px;
+                        padding: 12px;
+                        display: none; /* Hidden by default */
+                        transition: opacity 0.2s;
+                    }
+                    .rules-header {
+                        color: #cbd5e1;
+                        font-weight: 600;
+                        margin-bottom: 8px;
+                        font-size: 0.8rem;
                     }
                     .password-rules-list {
                         list-style: none;
@@ -93,35 +132,34 @@
                     .rule-item {
                         display: flex;
                         align-items: center;
-                        margin-bottom: 3px;
+                        margin-bottom: 4px;
+                        color: #94a3b8; /* Default gray */
+                        font-size: 0.8rem;
                     }
-                    .rule-item .icon {
+                    .rule-item svg {
                         margin-right: 8px;
-                        font-weight: bold;
-                        width: 15px;
-                        display: inline-block;
-                        text-align: center;
                     }
                     .rule-item.valid {
-                        color: #28a745;
-                    }
-                    .rule-item.valid .icon {
-                        content: "✓";
-                    }
-                    .rule-item.invalid {
-                        color: #dc3545; /* or a muted red */
+                        color: #10b981; /* Green */
                     }
                 </style>
+            <div class="identity-banner" style="padding: 16px; background-color: rgba(100, 108, 255, 0.1); border: 1px solid rgba(100, 108, 255, 0.3); border-radius: 12px; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 12px; text-align: left;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#646cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 2px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <p style="margin: 0; font-size: 14px; color: #cbd5e1; line-height: 1.4;">${msg("identityVerificationBanner")}</p>
+            </div>
+
             <div class="${properties.kcFormGroupClass!}">
                 <div id="kc-form-buttons" class="${properties.kcFormButtonsClass!}">
                     <button class="btn-primary" type="submit">${msg("doRegister")}</button>
                 </div>
             </div>
 
+            <div class="registration-container" style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 24px;">
+                <a href="${url.loginUrl}" class="register-link">${msg("alreadyHaveAccount")} ${msg("signIn")}</a>
+            </div>
 
-
-            <div class="registration-container">
-                <a href="${url.loginUrl}" class="btn-secondary">${kcSanitize(msg("backToLogin"))?no_esc}</a>
+            <div class="terms-container">
+                <p>${msg("termsAndPrivacy")}</p>
             </div>
         </form>
 
@@ -154,10 +192,8 @@
 
                 // --- Validation Logic ---
                 const emailInput = document.getElementById('email');
-                const usernameInput = document.getElementById('username');
                 
                 const emailError = document.getElementById('client-email-error');
-                const usernameError = document.getElementById('client-username-error');
 
                 function showError(input, element, msgText) {
                     if (element) {
@@ -190,7 +226,6 @@
                 // We'll manage button state separately
                 function updateButtonState() {
                     const isEmailValid = !!emailInput.value.trim();
-                    const isUsernameValid = !!usernameInput.value.trim();
                     
                     const password = passwordInput.value;
                     const confirm = passwordConfirmInput.value;
@@ -207,7 +242,7 @@
                     
                     const isPasswordMatch = confirm.length > 0 && password === confirm;
 
-                    if (isEmailValid && isUsernameValid && isPasswordComplex && isPasswordMatch) {
+                    if (isEmailValid && isPasswordComplex && isPasswordMatch) {
                         submitButton.disabled = false;
                         submitButton.classList.remove('disabled');
                     } else {
@@ -220,9 +255,6 @@
                 emailInput.addEventListener('blur', () => {
                    if(!emailInput.value.trim()) showError(emailInput, emailError, "${msg('missingEmail')?no_esc}");
                 });
-                usernameInput.addEventListener('blur', () => {
-                   if(!usernameInput.value.trim()) showError(usernameInput, usernameError, "${msg('missingUsername')?no_esc}");
-                });
                 passwordInput.addEventListener('blur', () => {
                    if(!passwordInput.value) showError(passwordInput, errorSpanTop, "${msg('missingPassword')?no_esc}");
                 });
@@ -234,10 +266,6 @@
                 // Input events to hide error and re-evaluate button
                 emailInput.addEventListener('input', () => {
                     hideError(emailInput, emailError);
-                    updateButtonState();
-                });
-                usernameInput.addEventListener('input', () => {
-                    hideError(usernameInput, usernameError);
                     updateButtonState();
                 });
 
@@ -320,19 +348,33 @@
 
                     for (const [key, isValid] of Object.entries(rules)) {
                         const ruleItem = document.getElementById('rule-' + key);
-                        const iconSpan = ruleItem.querySelector('.icon');
+                        const iconCircle = ruleItem.querySelector('.icon-circle');
+                        const iconCheck = ruleItem.querySelector('.icon-check');
+                        
                         if (isValid) {
                             ruleItem.classList.remove('invalid');
                             ruleItem.classList.add('valid');
-                            iconSpan.innerText = '✓';
+                            iconCircle.style.display = 'none';
+                            iconCheck.style.display = 'inline-block';
                         } else {
                             ruleItem.classList.remove('valid');
                             ruleItem.classList.add('invalid');
-                            iconSpan.innerText = '✗';
+                            iconCircle.style.display = 'inline-block';
+                            iconCheck.style.display = 'none';
                         }
                     }
                     updateButtonState();
                 }
+
+                // Show/Hide rules on focus/blur
+                const rulesContainer = document.getElementById('password-rules');
+                passwordInput.addEventListener('focus', () => {
+                     rulesContainer.style.display = 'block';
+                });
+                passwordInput.addEventListener('blur', () => {
+                     // Check if empty? Or just hide always? User said "shown only when pressed".
+                     rulesContainer.style.display = 'none';
+                });
 
                 // Attach modified listeners
                 // Final Event Attachment

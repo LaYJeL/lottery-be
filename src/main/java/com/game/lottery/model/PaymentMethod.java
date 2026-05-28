@@ -27,7 +27,8 @@ public class PaymentMethod extends Auditable {
     @Column(name = "method_type", nullable = false, length = 32)
     private PaymentMethodType type;
 
-    // Назва для користувача (наприклад: "Мій гаманець Binance" або "Зарплатна карта")
+    // Назва для користувача (наприклад: "Мій гаманець Binance" або "Зарплатна
+    // карта")
     @Column(name = "label", length = 100)
     private String label;
 
@@ -42,5 +43,6 @@ public class PaymentMethod extends Auditable {
     private String providerToken;
 
     @Column(name = "is_primary", nullable = false)
+    @Builder.Default
     private boolean isPrimary = false; // Чи використовувати цей метод за замовчуванням
 }
