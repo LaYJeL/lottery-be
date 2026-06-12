@@ -366,3 +366,13 @@ open http://localhost:8088/swagger-ui.html
 | SecureRandom | Cryptographically strong random number generator |
 | Pessimistic Lock | Database lock acquired before reading, preventing concurrent modifications |
 | Optimistic Lock | Version-based concurrency control, fails on conflict |
+
+## Claude Code Setup
+
+- **Model: Claude Fable 5** — pinned via `.claude/settings.json`
+  (`claude-fable-5[1m]`). Do not downgrade.
+- Shared environment (MCP servers, skills, plugins) is provisioned by
+  [LaYJeL/Claude_setup](https://github.com/LaYJeL/Claude_setup) — see its
+  `PROJECTS.md` for the cross-project policy.
+- On first session in a fresh clone, consider running `/graphify .` to build
+  the codebase knowledge graph.
