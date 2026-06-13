@@ -140,7 +140,7 @@ class WalletServiceTest {
         // Arrange
         UUID userId = UUID.randomUUID();
         Wallet wallet = Wallet.builder().id(UUID.randomUUID()).balance(new BigDecimal("200.00")).build();
-        when(walletRepository.findByUserId(userId)).thenReturn(Optional.of(wallet));
+        when(walletRepository.findByUserIdWithLock(userId)).thenReturn(Optional.of(wallet));
 
         WithdrawRequest request = new WithdrawRequest();
         request.setAmount(new BigDecimal("100.00"));
@@ -167,6 +167,8 @@ class WalletServiceTest {
         // Assert
         assertEquals(new BigDecimal("100.00"), wallet.getBalance()); // 200 - 100
         verify(walletRepository).save(wallet);
+        // Balance must be read under a pessimistic lock (no unlocked read path).
+        verify(walletRepository).findByUserIdWithLock(userId);
 
         assertEquals(TransactionType.WITHDRAWAL, result.getType());
         assertEquals(new BigDecimal("-100.00"), result.getAmount());
@@ -177,7 +179,7 @@ class WalletServiceTest {
         // Arrange
         UUID userId = UUID.randomUUID();
         Wallet wallet = Wallet.builder().id(UUID.randomUUID()).balance(new BigDecimal("50.00")).build();
-        when(walletRepository.findByUserId(userId)).thenReturn(Optional.of(wallet));
+        when(walletRepository.findByUserIdWithLock(userId)).thenReturn(Optional.of(wallet));
 
         WithdrawRequest request = new WithdrawRequest();
         request.setAmount(new BigDecimal("100.00"));

@@ -132,7 +132,11 @@ public class WalletService {
 
         @Transactional
         public TransactionDto withdraw(UUID userId, WithdrawRequest request) {
-                Wallet wallet = getOrCreateWallet(userId);
+                // Pessimistic lock: withdraw is a balance debit and must not race with
+                // concurrent withdrawals or competition spends (lost update -> negative
+                // balance / double-spend). Mirrors spendForCompetition.
+                Wallet wallet = walletRepository.findByUserIdWithLock(userId)
+                                .orElseGet(() -> getOrCreateWallet(userId));
                 PaymentMethod paymentMethod = null;
                 if (request.getPaymentMethodId() != null) {
                         paymentMethod = paymentMethodRepository.findById(request.getPaymentMethodId()).orElse(null);
