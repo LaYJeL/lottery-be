@@ -29,6 +29,7 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.when;
 
@@ -161,7 +162,10 @@ class CompetitionServiceTest {
         when(competitionRepository.findByStatus(eq(com.game.lottery.enums.CompetitionStatus.ACTIVE),
                 any(Pageable.class)))
                 .thenReturn(page);
-        when(competitionEntryRepository.findByUser_UserId(userId)).thenReturn(Collections.emptyList());
+        // The service resolves "entered" status via the batched findEnteredCompetitionIds
+        // query (not findByUser_UserId); none entered here.
+        when(competitionEntryRepository.findEnteredCompetitionIds(eq(userId), anyList()))
+                .thenReturn(Collections.emptyList());
         when(competitionMapper.toDto(any(Competition.class), eq(false))).thenAnswer(i -> {
             Competition c = i.getArgument(0);
             return CompetitionDto.builder()
